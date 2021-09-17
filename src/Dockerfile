@@ -11,6 +11,8 @@ RUN apk update \
 
 USER languagetool
 
+COPY --chown=languagetool start.sh start.sh
+
 ARG CACHE_BREAKER=unknown
 
 RUN wget https://internal1.languagetool.org/snapshots/LanguageTool-latest-snapshot.zip && \
@@ -18,8 +20,6 @@ RUN wget https://internal1.languagetool.org/snapshots/LanguageTool-latest-snapsh
     mv LanguageTool-*/* . && \
     rm LanguageTool-latest-snapshot.zip && \
     rm -r LanguageTool-*/
-
-COPY --chown=languagetool start.sh start.sh
 
 CMD [ "bash", "start.sh" ]
 
